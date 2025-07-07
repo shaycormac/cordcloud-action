@@ -1,6 +1,7 @@
 import asyncio
 from playwright.async_api import async_playwright
 import urllib.parse
+import os
 
 EMAIL = os.getenv("CC_EMAIL")
 PASSWD = os.getenv("CC_PASSWD")
