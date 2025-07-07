@@ -1,15 +1,28 @@
-name: CordCloud
+name: CordCloud Check-in
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
   checkin:
     runs-on: ubuntu-latest
     steps:
-      - uses: yanglbme/cordcloud-action@main
+      - uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
         with:
-          email: ${{ secrets.CC_EMAIL }}
-          passwd: ${{ secrets.CC_PASSWD }}
+          python-version: '3.x'
+
+      - name: Install Playwright
+        run: |
+          pip install playwright
+          playwright install chromium
+
+      - name: Run Check-in Script
+        env:
+          CC_EMAIL: ${{ secrets.CC_EMAIL }}
+          CC_PASSWD: ${{ secrets.CC_PASSWD }}
+        run: python cordcloud_checkin.py
