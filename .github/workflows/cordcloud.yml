@@ -25,4 +25,4 @@ jobs:
         env:
           CC_EMAIL: ${{ secrets.CC_EMAIL }}
           CC_PASSWD: ${{ secrets.CC_PASSWD }}
-        run: python cordcloud_checkin.py
+        run: python cordcloud_checkin1.py
